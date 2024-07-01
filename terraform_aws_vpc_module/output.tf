@@ -17,3 +17,7 @@ output "private_subnet_id" {
 output "database_subnet_id" {
   value = aws_subnet.database[*].id
 }
+
+output "default_vpc_id" {
+  value = data.aws_vpc.default_vpc.id
+}

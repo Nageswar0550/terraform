@@ -157,4 +157,8 @@ resource "aws_instance" "nat" {
   instance_type = "t2.micro"
   subnet_id = aws_subnet.public[0].id
   source_dest_check = true
+
+  tags = {
+    Name = "${var.project_name}-${var.environment}"
+  }
 }

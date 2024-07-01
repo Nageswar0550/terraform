@@ -83,3 +83,18 @@ variable "database_rt_tags" {
   type = map
   default = {}
 }
+
+variable "is_peering_required" {
+  type = bool
+  default = false
+}
+
+variable "requester_vpc_id" {
+  type = string
+  default = ""
+}
+
+variable "peering_tags" {
+  type = map
+  default = {}
+}
