@@ -2,7 +2,7 @@ resource "aws_security_group" "main" {
   count = length(var.sg_name)
   name = var.sg_name[count.index]
   description = "${var.sg_description}-${var.sg_name[count.index]}"
-  vpc_id = var.vpc_id
+  vpc_id = var.sg_name[count.index] == "vpn" ? var.vpc_id_default : var.vpc_id
 
   egress {
     from_port        = 0
