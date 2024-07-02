@@ -8,6 +8,15 @@ data "aws_ami" "ami" {
   }
 }
 
+data "aws_vpc" "default" {
+  default = true
+}
+
+data "aws_subnet" "default" {
+  vpc_id = data.aws_vpc.default.id
+  availability_zone = "us-east-1a"
+}
+
 data "aws_ssm_parameter" "public_subnet_id" {
   name = "/${var.project_name}/${var.environment}/public_subnet_id"
 }
@@ -58,4 +67,8 @@ data "aws_ssm_parameter" "shipping_sg_id" {
 
 data "aws_ssm_parameter" "payment_sg_id" {
   name = "/${var.project_name}/${var.environment}/payment/sg_id"
+}
+
+data "aws_ssm_parameter" "vpn_sg_id" {
+  name = "/${var.project_name}/${var.environment}/vpn/sg_id"
 }

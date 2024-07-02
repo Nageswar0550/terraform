@@ -37,3 +37,7 @@ data "aws_ssm_parameter" "payment_ip" {
 data "aws_ssm_parameter" "shipping_ip" {
   name = "/${local.name}/shipping/private_ip"
 }
+
+data "aws_ssm_parameter" "web_ip_private" {
+  name = "/${local.name}/web/private_ip"
+}

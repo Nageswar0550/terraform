@@ -14,6 +14,14 @@ resource "aws_route53_record" "web" {
   records = [data.aws_ssm_parameter.web_ip.value]
 }
 
+resource "aws_route53_record" "web_private" {
+  zone_id = var.zone_id
+  name    = "web.${var.domain}"
+  type    = "A"
+  ttl     = 10
+  records = [data.aws_ssm_parameter.web_ip_private.value]
+}
+
 resource "aws_route53_record" "user" {
   zone_id = var.zone_id
   name    = "user.${var.domain}"

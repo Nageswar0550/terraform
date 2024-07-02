@@ -4,6 +4,12 @@ resource "aws_ssm_parameter" "web_ip" {
   type = "String"
 }
 
+resource "aws_ssm_parameter" "web_ip_private" {
+  name = "/${local.name}/web/private_ip"
+  value = module.web.private_ip
+  type = "String"
+}
+
 resource "aws_ssm_parameter" "mongodb_ip" {
   name = "/${local.name}/mongodb/private_ip"
   value = module.web.private_ip
