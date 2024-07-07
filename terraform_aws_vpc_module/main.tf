@@ -111,54 +111,50 @@ resource "aws_route_table" "database" {
 #Associsting Public route table to both Public subnets
 resource "aws_route_table_association" "public" {
   count = 2
-  subnet_id = aws_subnet.public[count.index].id
+  subnet_id = "${aws_subnet.public[count.index].id}"
   route_table_id = aws_route_table.public.id
 }
 
 #Associsting Private route table to both Private subnets
 resource "aws_route_table_association" "private" {
   count = 2
-  subnet_id = aws_subnet.private[count.index].id
+  subnet_id = "${aws_subnet.private[count.index].id}"
   route_table_id = aws_route_table.private.id
 }
 
 #Associsting Database route table to both Database subnets
 resource "aws_route_table_association" "database" {
   count = 2
-  subnet_id = aws_subnet.database[count.index].id
+  subnet_id = "${aws_subnet.database[count.index].id}"
   route_table_id = aws_route_table.database.id
+}
+
+resource "aws_eip" "main" {
+  domain = "vpc"
+}
+
+resource "aws_nat_gateway" "main" {
+  allocation_id = aws_eip.main.id
+  subnet_id = aws_subnet.public[0].id
 }
 
 #Adding Public route with gateway as IGW
 resource "aws_route" "public" {
   route_table_id = aws_route_table.public.id
   destination_cidr_block = "0.0.0.0/0"
-  gateway_id = aws_internet_gateway.main.id
-  
+  gateway_id = aws_internet_gateway.main.id 
 }
 
 #Adding Private route with gateway as NAT instance
 resource "aws_route" "private" {
   route_table_id = aws_route_table.private.id
   destination_cidr_block = "0.0.0.0/0"
-  network_interface_id = aws_instance.nat.primary_network_interface_id
+  gateway_id = aws_nat_gateway.main.id
 }
 
 #Adding Database route with gateway as NAT instance
 resource "aws_route" "database" {
   route_table_id = aws_route_table.database.id
   destination_cidr_block = "0.0.0.0/0"
-  network_interface_id = aws_instance.nat.primary_network_interface_id
-}
-
-#Creating NAT Instance
-resource "aws_instance" "nat" {
-  ami = data.aws_ami.nat.id
-  instance_type = "t2.micro"
-  subnet_id = aws_subnet.public[0].id
-  source_dest_check = true
-
-  tags = {
-    Name = "${var.project_name}-${var.environment}"
-  }
+  gateway_id = aws_nat_gateway.main.id
 }
