@@ -57,14 +57,14 @@ data "aws_ssm_parameter" "vpn_sg_id" {
   name = "/${var.project_name}/${var.environment}/vpn/sg_id"
 }
 
-data "aws_ssm_parameter" "private_subnet_id" {
-  name = "/${var.project_name}/${var.environment}/private_subnet_id"
-}
-
 data "aws_ssm_parameter" "public_subnet_id" {
   name = "/${var.project_name}/${var.environment}/public_subnet_id"
 }
 
 data "aws_ssm_parameter" "database_subnet_id" {
   name = "/${var.project_name}/${var.environment}/database_subnet_id"
+}
+
+data "aws_ssm_parameter" "private_subnet_id" {
+  name = "/${var.project_name}/${var.environment}/private_subnet_id"
 }

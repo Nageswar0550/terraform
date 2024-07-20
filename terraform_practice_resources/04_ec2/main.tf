@@ -93,3 +93,27 @@ module "shipping" {
   environment = var.environment
   component = "shipping"
 }
+
+module "web" {
+  source = "../../terraform_practice_modules/04_ec2"
+  instance_type = "t2.micro"
+  ami_id = data.aws_ami.ami.id
+  vpc_security_group_id = data.aws_ssm_parameter.web_sg_id.value
+  subnet_id = local.public_subnet_id
+  project_name = var.project_name
+  instance_names = var.instance_names
+  environment = var.environment
+  component = "web"
+}
+
+module "payment" {
+  source = "../../terraform_practice_modules/04_ec2"
+  instance_type = "t2.micro"
+  ami_id = data.aws_ami.ami.id
+  vpc_security_group_id = data.aws_ssm_parameter.payment_sg_id.value
+  subnet_id = local.private_subnet_id
+  project_name = var.project_name
+  instance_names = var.instance_names
+  environment = var.environment
+  component = "payment"
+  }
