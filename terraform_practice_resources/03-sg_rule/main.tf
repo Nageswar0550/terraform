@@ -88,8 +88,8 @@ resource "aws_security_group_rule" "cart_payment" {
   security_group_id = data.aws_ssm_parameter.cart_sg_id.value
 }
 
-resource "aws_security_group_rule" "web_catalogue" {
-  source_security_group_id = data.aws_ssm_parameter.web_sg_id.value
+resource "aws_security_group_rule" "app_alb_catalogue" {
+  source_security_group_id = data.aws_ssm_parameter.app_alb_sg_id.value
   type              = "ingress"
   from_port         = 8080
   to_port           = 8080
@@ -97,8 +97,8 @@ resource "aws_security_group_rule" "web_catalogue" {
   security_group_id = data.aws_ssm_parameter.catalogue_sg_id.value
 }
 
-resource "aws_security_group_rule" "web_cart" {
-  source_security_group_id = data.aws_ssm_parameter.web_sg_id.value
+resource "aws_security_group_rule" "app_alb_cart" {
+  source_security_group_id = data.aws_ssm_parameter.app_alb_sg_id.value
   type              = "ingress"
   from_port         = 8080
   to_port           = 8080
@@ -106,8 +106,8 @@ resource "aws_security_group_rule" "web_cart" {
   security_group_id = data.aws_ssm_parameter.cart_sg_id.value
 }
 
-resource "aws_security_group_rule" "web_user" {
-  source_security_group_id = data.aws_ssm_parameter.web_sg_id.value
+resource "aws_security_group_rule" "app_alb_user" {
+  source_security_group_id = data.aws_ssm_parameter.app_alb_sg_id.value
   type              = "ingress"
   from_port         = 8080
   to_port           = 8080
@@ -115,8 +115,8 @@ resource "aws_security_group_rule" "web_user" {
   security_group_id = data.aws_ssm_parameter.user_sg_id.value
 }
 
-resource "aws_security_group_rule" "web_shipping" {
-  source_security_group_id = data.aws_ssm_parameter.web_sg_id.value
+resource "aws_security_group_rule" "app_alb_shipping" {
+  source_security_group_id = data.aws_ssm_parameter.app_alb_sg_id.value
   type              = "ingress"
   from_port         = 8080
   to_port           = 8080
@@ -124,14 +124,59 @@ resource "aws_security_group_rule" "web_shipping" {
   security_group_id = data.aws_ssm_parameter.shipping_sg_id.value
 }
 
-resource "aws_security_group_rule" "web_payment" {
-  source_security_group_id = data.aws_ssm_parameter.web_sg_id.value
+resource "aws_security_group_rule" "app_alb_payment" {
+  source_security_group_id = data.aws_ssm_parameter.app_alb_sg_id.value
   type              = "ingress"
   from_port         = 8080
   to_port           = 8080
   protocol          = "tcp"
   security_group_id = data.aws_ssm_parameter.payment_sg_id.value
 }
+
+# resource "aws_security_group_rule" "web_catalogue" {
+#   source_security_group_id = data.aws_ssm_parameter.web_sg_id.value
+#   type              = "ingress"
+#   from_port         = 8080
+#   to_port           = 8080
+#   protocol          = "tcp"
+#   security_group_id = data.aws_ssm_parameter.catalogue_sg_id.value
+# }
+
+# resource "aws_security_group_rule" "web_cart" {
+#   source_security_group_id = data.aws_ssm_parameter.web_sg_id.value
+#   type              = "ingress"
+#   from_port         = 8080
+#   to_port           = 8080
+#   protocol          = "tcp"
+#   security_group_id = data.aws_ssm_parameter.cart_sg_id.value
+# }
+
+# resource "aws_security_group_rule" "web_user" {
+#   source_security_group_id = data.aws_ssm_parameter.web_sg_id.value
+#   type              = "ingress"
+#   from_port         = 8080
+#   to_port           = 8080
+#   protocol          = "tcp"
+#   security_group_id = data.aws_ssm_parameter.user_sg_id.value
+# }
+
+# resource "aws_security_group_rule" "web_shipping" {
+#   source_security_group_id = data.aws_ssm_parameter.web_sg_id.value
+#   type              = "ingress"
+#   from_port         = 8080
+#   to_port           = 8080
+#   protocol          = "tcp"
+#   security_group_id = data.aws_ssm_parameter.shipping_sg_id.value
+# }
+
+# resource "aws_security_group_rule" "web_payment" {
+#   source_security_group_id = data.aws_ssm_parameter.web_sg_id.value
+#   type              = "ingress"
+#   from_port         = 8080
+#   to_port           = 8080
+#   protocol          = "tcp"
+#   security_group_id = data.aws_ssm_parameter.payment_sg_id.value
+# }
 
 resource "aws_security_group_rule" "web_internet" {
   cidr_blocks = ["0.0.0.0/0"]
