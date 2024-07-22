@@ -285,3 +285,12 @@ resource "aws_security_group_rule" "vpn_mysql" {
   protocol = "tcp"
   security_group_id = data.aws_ssm_parameter.mysql_sg_id.value
 }
+
+resource "aws_security_group_rule" "vpn_app_alb" {
+  source_security_group_id = data.aws_ssm_parameter.vpn_sg_id.value
+  type              = "ingress"
+  from_port         = 80
+  to_port           = 80
+  protocol          = "tcp"
+  security_group_id = data.aws_ssm_parameter.app_alb_sg_id.value
+}
