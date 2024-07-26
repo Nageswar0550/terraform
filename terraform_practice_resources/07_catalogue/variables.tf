@@ -19,9 +19,13 @@ variable "ec2_tags" {
 }
 
 variable "instance_names" {
-  default = ""
+  default = []
 }
 
 variable "component" {
-  default = "catalogue_ami"
+  default = "catalogue"
+}
+
+variable "domain" {
+  default = "challa.cloud"
 }
