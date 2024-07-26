@@ -1,6 +1,6 @@
 variable "sg_name" {
   type = list
-  default = ["web","mongodb","user","cart","catalogue","redis","mysql","rabbitmq","payment","shipping","vpn"]
+  default = ["web","mongodb","user","cart","catalogue","redis","mysql","rabbitmq","payment","shipping","vpn","app_alb"]
 }
 
 variable "project_name" {

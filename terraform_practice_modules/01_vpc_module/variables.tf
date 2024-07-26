@@ -57,3 +57,15 @@ variable "private_rt_tags" {
 variable "database_rt_tags" {
   default = {}
 }
+
+variable "peering_tags" {
+  default = {}
+}
+
+variable "is_peering_required" {
+  default = false
+}
+
+variable "requester_vpc_id" {
+  default = ""
+}

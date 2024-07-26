@@ -12,6 +12,11 @@ variable "project_name" {
 
 variable "instance_names" {
   type = list
+  default = []
+}
+
+variable "user_data" {
+  default = ""
 }
 
 variable "instance_type" {
@@ -36,4 +41,9 @@ variable "vpc_security_group_id" {
 
 variable "component" {
   type = string
+}
+
+variable "iam_instance_profile" {
+  type = string
+  default = ""
 }

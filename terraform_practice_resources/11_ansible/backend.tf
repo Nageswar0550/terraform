@@ -7,7 +7,7 @@ terraform {
   }
   backend "s3" {
     bucket         = "challa-rao-backend-2"
-    key            = "terraform_practice_sg_module"
+    key            = "terraform_practice_ansible_module"
     region         = "us-east-1"
     dynamodb_table = "challa-rao"
   }

@@ -6,8 +6,8 @@ terraform {
     }
   }
   backend "s3" {
-    bucket         = "challa-rao-backend"
-    key            = "terraform_practice_ec2_module"
+    bucket         = "challa-rao-backend-2"
+    key            = "terraform_practice_vpn_module"
     region         = "us-east-1"
     dynamodb_table = "challa-rao"
   }
